@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Password Manager Extension",
+  "description": "Final project of CNS, extension",
+  "version": "1.0",
+  "icons": {
+    "128": "image/Neoaspect.png",
+    "48": "image/Neoaspect.png",
+    "16": "image/Neoaspect.png"
+  },
+  "browser_action": {
+    "default_icon": "image/Neoaspect.png",
+    "default_popup": "index.html"
+  },
+  "content_scripts":[
+    {
+      "matches": ["<all_urls>"],
+      "js" : ["content.js"]
+    }
+  ],
+  // "background":{
+  //   "scripts": ["background.js"]
+  // },
+  "permissions": [
+    "storage",
+    "notifications"
+  ]
+}
