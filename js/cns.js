@@ -16,11 +16,8 @@ $(function(){
 			// if connection done/success, request firebase the corresponding password for a domain
 			// get the response(input name and corresponding value)
 			// send message to content-script to find the password field and input field and change the text
-			$(".foldText").hide();
-			$(".foldText2").hide();
-			$("#submit1").val("0");
-			$("#submit1").text("Retrieve password");
-
+			Initialize();	
+			
 			// send notifications if connection success
 			const options = {
 				type:"basic",
@@ -29,7 +26,7 @@ $(function(){
 				message:"Connection success, you can now import password from iphone to the webpage",
 			};
 			chrome.notifications.create(options);
-			
+
 			let params = {
 		      active: true,
 		      currentWindow: true
@@ -44,12 +41,16 @@ $(function(){
 		}
 	});
 	$("#submit3").click(function(){
-		// back to initial states
-		$("#submit3").hide();
-		$("#submit2").show();
-		$("#submit1").val("0");
-		$("#submit1").text("Retrieve password");
-		$(".foldText").hide();
-		$(".foldText2").hide();
+		Initialize();
 	})
 });
+
+// back to initial states
+function Initialize(){
+	$("#submit3").hide();
+	$("#submit2").show();
+	$("#submit1").val("0");
+	$("#submit1").text("Retrieve password");
+	$(".foldText").hide();
+	$(".foldText2").hide();
+}
