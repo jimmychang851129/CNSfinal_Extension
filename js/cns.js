@@ -3,7 +3,8 @@ $(function(){
 		if($("#submit1").val() === "0"){			
 			// try connection and show connectionID
 			// send request to firebase to get ID and show on screen
-			$(".foldText").text("FirebaseID = Roselia");	// add connectionID
+			// $(".foldText").text("FirebaseID = ");	// add connectionID
+			$('.foldText').qrcode({width: 128,height: 128,text:"RRRRoselia"});
 			$(".foldText2").show();
 			$(".foldText").show();
 			$("#submit1").text("Connect to iphone");
@@ -51,6 +52,7 @@ function Initialize(){
 	$("#submit2").show();
 	$("#submit1").val("0");
 	$("#submit1").text("Retrieve password");
+	$('canvas').remove();
 	$(".foldText").hide();
 	$(".foldText2").hide();
 }

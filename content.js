@@ -1,5 +1,4 @@
 chrome.runtime.onMessage.addListener(setPassword);
-
 function setPassword(msg,sender,resp){
 	console.log("msg= ",msg);
 	let data = document.getElementsByTagName('input');
