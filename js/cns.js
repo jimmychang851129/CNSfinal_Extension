@@ -5,9 +5,9 @@ $(function(){
     const sender_id = "427562682991";
 
 	$("#submit1").click(function(){
-		if($("#submit1").val() === "0"){			
+		if($("#submit1").val() === "0"){
 			register();
-			setTimeout(function(){			
+			setTimeout(function(){
 				$(".foldText").show();
 				$(".foldText2").show();
 				$("#submit1").text("Connect to Iphone");
@@ -20,9 +20,9 @@ $(function(){
 			// if connection done/success, request firebase the corresponding password for a domain
 			// get the response(input name and corresponding value)
 			// send message to content-script to find the password field and input field and change the text
-			// Initialize();	
-			
-			// send current domain to firebase server 
+			// Initialize();
+
+			// send current domain to firebase server
 			request();
 			$("#submit1").text("Retrieve password");
 			$('#submit1').val("2");
@@ -37,7 +37,7 @@ $(function(){
 	$("#submit3").click(function(){
 		Initialize();
 	})
-	
+
 	// register callback print register_id
 	function registerCallback(regId) {
 	    register_id = regId;
@@ -46,16 +46,18 @@ $(function(){
 	    }
 	    chrome.storage.local.set({"register_id": register_id});
 	    console.log("register_id = ",register_id);
+        $('canvas').remove();
+        $('.foldText').qrcode({width: 128, height: 128, text: register_id});
 	}
 
 
-	// register a id 
+	// register a id
 	function register(){
 	    chrome.storage.local.get("register_id", function(result) {
-	        if (result["register_id"]){
-	            console.log(result["register_id"]);
-	            register_id = result["register_id"];
-	            console.log("register_id = ",register_id)
+            if (result["register_id"]){
+                console.log(result["register_id"]);
+                register_id = result["register_id"];
+                console.log("register_id = ",register_id);
 	            $('canvas').remove();
 	            $('.foldText').qrcode({width: 128, height: 128, text: register_id});
 	        }
@@ -77,10 +79,17 @@ $(function(){
 	        }
 	    });
 	    chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs){
+            var random_str = "";
+            for(var tmp=0; tmp<64; tmp++){
+                random_str = random_str + String.fromCharCode(Math.floor(Math.random()*256));
+            }
+            random_str = btoa(random_str);
+            console.log(random_str);
+            chrome.runtime.sendMessage({key : random_str});
 	        var qqurl = tabs[0].url.split('//')[1].split('/')[0];
 	        console.log("url = ",qqurl);
 	        $('canvas').remove();
-	        $('.foldText').qrcode({width: 128, height: 128, text: qqurl});
+	        $('.foldText').qrcode({width: 128, height: 128, text: random_str + "||" + qqurl});
 	        $('foldText').show();
 	        $('.foldText2').text("Scan the qrcode to request for password");
 	        $('.foldText2').show();
