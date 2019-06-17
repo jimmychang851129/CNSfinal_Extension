@@ -18,8 +18,14 @@
       "js" : ["content.js"]
     }
   ],
+  "background": {
+      "scripts": ["background.js"]
+  },
   "permissions": [
     "storage",
-    "notifications"
+    "notifications",
+    "gcm",
+    "tabs",
+    "*://*.googleapis.com/*"
   ]
 }
