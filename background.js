@@ -7,7 +7,7 @@ function getNotificationId() {
 function messageReceived(message) {
   // A message is an object with a data property that
   // consists of key-value pairs.
-  console.log(message);
+  console.log("message received = ",message);
   // Concatenate all key-value pairs to form a display string.
   var messageString = [];
   for (var key in message.data) {

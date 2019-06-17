@@ -1,14 +1,11 @@
 $(function(){
     var register_id;
-    const api_key = "AAAAKBzleVA:APA91bGqviLE2tKpJ3wpDrMVgz2vOtBus5JWh0H97stwknOr7s-bsiv9n7mWX1c16ZEN-H4e8SGkalhDx8TVjOCXQNsFsWPwbDO3uK-wT2IZB6Kg8cLaHMAxfVNflNgJIXxo1kPhH3Vt";
-    var device_id;
-    const sender_id = "172283492688";
+    const api_key = "AAAAY4y4ym8:APA91bGvRhyuiKkkzdzK0CkeqgRHPSpBoo4ycu0Tv66qNiG3mQBFIaU62P9vuvCXjRHRhkNUNg2AW4QvgP8Lt6QfP1IR4AKo503csyYVvGqA-EepB4Bv18ymJSTcWzh4sRV0yZNm35by"
+        var device_id;
+    const sender_id = "427562682991";
 
 	$("#submit1").click(function(){
 		if($("#submit1").val() === "0"){			
-			// try connection and show connectionID
-			// send request to firebase to get ID and show on screen
-			// $(".foldText").text("FirebaseID = ");	// add connectionID
 			register();
 			setTimeout(function(){			
 				$(".foldText").show();
@@ -31,18 +28,7 @@ $(function(){
 			$('#submit1').val("2");
 		}
 		else if($('#submit1').val() === "2"){
-			// let params = {
-		 //      active: true,
-		 //      currentWindow: true
-		 //    };
-		 //    let UserInfo = [['user','roselia'],['password','aiai']]		// assumption default value
-		 //    chrome.tabs.query(params,function(tabs){
-		 //    	console.log("tabs = ",tabs)
-		 //    	chrome.tabs.sendMessage(tabs[0].id,UserInfo);
-		 //    });
-			// console.log("message sent")
 			Initialize();
-			// if connection failed
 		}
 		else{
 			console.log("error occur invalid #submit1 number = ",$('#submit1').val());
@@ -59,7 +45,7 @@ $(function(){
 	        console.log(chrome.runtime.lastError.message);
 	    }
 	    chrome.storage.local.set({"register_id": register_id});
-	    console.log(register_id);
+	    console.log("register_id = ",register_id);
 	}
 
 
@@ -69,6 +55,7 @@ $(function(){
 	        if (result["register_id"]){
 	            console.log(result["register_id"]);
 	            register_id = result["register_id"];
+	            console.log("register_id = ",register_id)
 	            $('canvas').remove();
 	            $('.foldText').qrcode({width: 128, height: 128, text: register_id});
 	        }
@@ -80,18 +67,17 @@ $(function(){
 
 	// request the gcm to get data
 	function request(){
-	    var http = new XMLHttpRequest();
-	    var url  = "https://android.googleapis.com/gcm/send";
-	    var data = "registration_id=" + register_id + "&data.user=Roselia&data.password=aiai";
-	    console.log(url);
-	    console.log(data);
-	    http.open('POST', url, true);
-	    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-	    http.setRequestHeader('Authorization', 'key='+api_key);
-	    http.send(data);
-
-	    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs){
-	        var qqurl = tabs[0].url;
+		 chrome.storage.local.get("register_id", function(result) {
+	        if (result["register_id"]){
+	            console.log(result["register_id"]);
+	            register_id = result["register_id"];
+	        }
+	        else{
+	            console.log("Error: register_id not found");
+	        }
+	    });
+	    chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs){
+	        var qqurl = tabs[0].url.split('//')[1].split('/')[0];
 	        console.log("url = ",qqurl);
 	        $('canvas').remove();
 	        $('.foldText').qrcode({width: 128, height: 128, text: qqurl});
