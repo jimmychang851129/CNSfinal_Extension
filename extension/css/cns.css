@@ -1,0 +1,75 @@
+body {
+	background: url(../image/cloud.jpg) no-repeat center;
+	background-size: cover;
+	width:575px;
+	height:350px;
+}
+.jumbotron{
+	/*background-color: #8A2BE2*/
+	background-image: url(../image/zeit.jpeg);
+	background-size: cover;
+}
+
+.jumbotron h4{
+    color: #fff;
+    text-align: center;
+}
+
+#container {
+    position: relative;
+    width:100%;
+    height:100%;
+}
+
+#submit1{
+	border: 4px #009FCC solid;
+	color: #B94FFF;
+	font-size:x-large;
+	background-color: #000000;
+	display: inline;
+	position:absolute;
+	left:0%;
+	bottom:0;
+	width:50%;	/* modified */
+	height:15%;
+}
+#submit2{
+	border: 4px #009FCC solid;
+	color: #B94FFF;
+	font-size:x-large;
+	background-color: #000000;
+	display: inline;
+	position:absolute;
+	right:0%;
+	bottom:0;
+	width:50%;	/* modified */
+	height:15%;
+}
+
+#submit3{
+	border: 4px #009FCC solid;
+	color: #B94FFF;
+	font-size:x-large;
+	background-color: #000000;
+	display: inline;
+	position:absolute;
+	right:0%;
+	bottom:0;
+	width:50%;	/* modified */
+	height:15%;
+	display:none;
+}
+
+div{
+	text-align: center;
+}
+
+.foldText{
+	display: none;
+	font-size:xx-large;
+}
+
+.foldText2{
+	display: none;
+	color:black;
+}
