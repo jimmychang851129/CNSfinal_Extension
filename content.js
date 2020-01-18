@@ -5,9 +5,11 @@ function setPassword(msg,sender,resp){
 	// not yet done: should get the list from firebase and key in corresponding value
 	var FIND = 0;
 	for(var i = 0 ; i < data.length ; i++){
-		if(data[i].type === "password" || (data[i].type === "text" && data[i].name==="user")){
-			FIND = 1;
-			data[i].value = "Roselia";
+		for(var j = 0 ; j < msg.length ; j++){
+			if(data[i].type === msg[j][0]){
+				FIND = 1;
+				data[i].value = msg[j][1];
+			}
 		}
 	}
 	if(FIND === 0){
